@@ -13,8 +13,11 @@ Sub stockLoop():
     Dim tickerID As String '<- holds the ticker id to put in the table
     Dim tickerTable As Integer '<- used to put ticker id in the table
     Dim yearChange As Double '<- yearly change from first opening to last closing
+    Dim yearTable As Double '<- used to put year change in the table
     Dim percentChange As Double '<- percent change from first opening to last closing
-    Dim stockVolume As Long '<- total volume of the stock
+    Dim percentTable As Double '<- used to put percent change in the table
+    Dim stockVolume As Single '<- total volume of the stock
+    Dim volumeTable As Single '<- used to put stock volume total in table
     Dim column As Integer '<- used to grab the ticker ids
 
     'defining wide variables
@@ -22,13 +25,23 @@ Sub stockLoop():
     lastRow = Cells(Rows.Count, 1).End(xlUp).Row
     tickerTable = 2
     column = 1
+    yearTable = 2
+    percentTable = 2
+    stockVolume = 0
+    volumeTable = 2
+
     'loop through whole workbook
     For w = 1 To wsCount
-        For i = 1 To lastRow
-            If Cells(i + 1, column).Value <> Cells(i, column).Value Then
+        For i = 2 To lastRow
+            If Cells(i + 1, column).Value <> Cells(i, column).Value Then '<- if the next cell is a different ticker id
                 tickerID = Cells(i + 1, column).Value
                 Range("I" & tickerTable).Value = tickerID
                 tickerTable = tickerTable + 1
+                volumeTable = volumeTable + 1
+                stockVolume = 0
+            Else '<- if the next cell is the same ticker id
+                stockVolume = stockVolume + Cells(i, 7).Value
+                Range("L" & volumeTable) = stockVolume
             End If
         Next i
     Next w
