@@ -8,7 +8,7 @@
 Sub stockLoop():
     'declaring variables
     Dim wsCount As Integer '<- used to loop through the whole workbook
-    Dim w As Integer '<- variable used to loop through whole workbook
+    Dim ws As Worksheet '<- variable used to loop through whole workbook
     Dim lastRow As Long '<- the last filled row in the sheet
     Dim tickerID As String '<- holds the ticker id to put in the table
     Dim tickerTable As Integer '<- used to put ticker id in the table
@@ -28,22 +28,22 @@ Sub stockLoop():
     yearTable = 2
     percentTable = 2
     stockVolume = 0
-    volumeTable = 2
+    volumeTable = 1
 
     'loop through whole workbook
-    For w = 1 To wsCount
-        For i = 2 To lastRow
+    For Each ws In Worksheets
+        For i = 1 To lastRow
             If Cells(i + 1, column).Value <> Cells(i, column).Value Then '<- if the next cell is a different ticker id
                 tickerID = Cells(i + 1, column).Value
-                Range("I" & tickerTable).Value = tickerID
+                ws.Range("I" & tickerTable).Value = tickerID
                 tickerTable = tickerTable + 1
                 volumeTable = volumeTable + 1
                 stockVolume = 0
             Else '<- if the next cell is the same ticker id
                 stockVolume = stockVolume + Cells(i, 7).Value
-                Range("L" & volumeTable) = stockVolume
+                ws.Range("L" & volumeTable) = stockVolume
             End If
         Next i
-    Next w
+    Next ws
 
 End Sub
