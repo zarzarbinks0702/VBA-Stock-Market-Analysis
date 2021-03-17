@@ -35,10 +35,12 @@ Sub stockLoop():
             End If
 
             If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then '<- if the next cell is a different ticker id
-                tickerID = Cells(i + 1, 1).Value
+                tickerID = Cells(i, 1).Value
                 yearChange = closeValue - openValue
+                percentChange = yearChange / openValue * 100
                 ws.Range("I" & tableSpot).Value = tickerID
                 ws.Range("J" & tableSpot).Value = yearChange
+                ws.Range("K" & tableSpot).Value = percentChange
                 tableSpot = tableSpot + 1
                 stockVolume = 0
             Else '<- if the next cell is the same ticker id
