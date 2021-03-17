@@ -20,13 +20,14 @@ Sub stockLoop():
         Set wkst(i) = ThisWorkbook.Sheets(i + 1)
     Next i
 
-    'defining wide/beginning variables
+    'defining wide variables
     lastRow = Cells(Rows.Count, 1).End(xlUp).Row
-    tableSpot = 2
-    stockVolume = 0
 
     'loop through whole workbook
     For Each ws In wkst
+        'defining beginning variables to reset for each sheet
+        tableSpot = 2
+        stockVolume = 0
         For i = 2 To lastRow
             openValue = Cells(2, 3).Value '<- gives first open value from table
             If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then '<- if the next cell is a different ticker id
@@ -35,8 +36,16 @@ Sub stockLoop():
                 yearChange = closeValue - openValue
                 percentChange = yearChange / openValue * 100
                 ws.Range("I" & tableSpot).Value = tickerID
-                ws.Range("J" & tableSpot).Value = yearChange
-                ws.Range("K" & tableSpot).Value = percentChange
+                ws.Range("J" & tableSpot).Value = Round(yearChange, 2)
+
+                'change color of cell based on positive or negative yearly change
+                If yearChange.Value >= 0 Then
+                    ws.Range("J" & tableSpot).Interior.ColorIndex = 4
+                Else
+                    ws.Range("J" & tableSpot).Interior.ColorIndex = 3
+                End If
+
+                ws.Range("K" & tableSpot).Value = Format(percentChange, "#.##""%") '(Y, 2021)
                 tableSpot = tableSpot + 1
                 stockVolume = 0
                 openValue = Cells(i + 1, 3).Value
@@ -54,4 +63,5 @@ End Sub
 'Loop through all worksheets with for each - vba code examples.(2019, April 05). Retrieved March 16, 2021, from https://www.automateexcel.com/vba/cycle-and-update-all-worksheets/
 'Tom (AnalystCave). (2021, January 04). Excel worksheets TUTORIAL: VBA Activesheet vs WORKSHEETS. Retrieved March 17, 2021, from https://analystcave.com/excel-vba-worksheets-tutorial-vba-activesheet-vs-worksheets/
 'Vba variable types: Declare different types of variable in excel vba. (2020, August 21). Retrieved March 17, 2021, from https://www.educba.com/vba-variable-types/
+'Y, J. A. (2021, February 22). Vba format: How to use vba format function? (examples). Retrieved March 17, 2021, from https://www.wallstreetmojo.com/vba-format/
 'used in class activities from lessons 2.1, 2.2, and 2.3 as guides
