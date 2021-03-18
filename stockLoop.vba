@@ -12,6 +12,10 @@ Sub stockLoop():
 
         'defining beginning variables to reset for each sheet
         lastRow = Cells(rows.Count, 1).End(xlUp).Row
+        Range("I1").Value = "Ticker"
+        Range("J1").Value = "Yearly Change"
+        Range("K1").Value = "Percent Change"
+        Range("L1").Value = "Total Stock Volume"
         tableSpot = 2
         stockVolume = 0
 
