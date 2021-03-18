@@ -18,12 +18,11 @@ Sub stockLoop():
         Range("L1").Value = "Total Stock Volume"
         tableSpot = 2
         stockVolume = 0
+        openValue = Cells(2, 3).Value '<- gives first open value from table
 
         For i = 2 To lastRow
 
-            openValue = Cells(2, 3).Value '<- gives first open value from table
-
-            If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then '<- if the next cell is a different ticker id
+                        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then '<- if the next cell is a different ticker id
                 tickerID = Cells(i, 1).Value
                 closeValue = Cells(i, 6).Value
                 yearChange = closeValue - openValue
