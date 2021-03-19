@@ -9,3 +9,5 @@ Formatted the yearly change and percent change columns as follows:
   Percent change rounds to 2 decimals and has the percent symbol behind it.
 
 Additionally, running the code once on one sheet will run the code through all sheets at the same time.
+
+Images of results for the three given years (2014-2016) are included in the repository.
