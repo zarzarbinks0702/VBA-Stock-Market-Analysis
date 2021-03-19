@@ -12,13 +12,13 @@ Sub stockLoop():
     Dim closeValue As Double '<- used in change calculations
 
     'defining wide variables
-    lastRow = Cells(rows.Count, 1).End(xlUp).Row
+    lastRow = Cells(Rows.Count, 1).End(xlUp).Row
 
     'loop through whole workbook
     For Each ws In ActiveWorkbook.Worksheets
 
         ws.Activate
-    
+
         'defining beginning variables to reset for each sheet
         ws.Range("I1").Value = "Ticker"
         ws.Range("J1").Value = "Yearly Change"
