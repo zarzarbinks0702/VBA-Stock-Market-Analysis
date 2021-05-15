@@ -1,4 +1,4 @@
-# VBA-challenge
+# VBA-Stock-Market-Analysis
 Project part of a class assignment for getting familiar with VBA. 03/20/2021.
 
 -------------------------------------------------------------------------------------------------------
